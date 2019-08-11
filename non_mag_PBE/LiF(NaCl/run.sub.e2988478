@@ -1,0 +1,6 @@
+mkdir: cannot create directory ‘/scratch/2988478.1.multiway.q’: Read-only file system
+cp: target ‘/scratch/2988478.1.multiway.q’ is not a directory
+/gridware/default/spool/comp143/job_scripts/2988478: line 48: cd: /scratch/2988478.1.multiway.q: No such file or directory
+cp: ‘LiF.castep’ and ‘/home/dirac/tmcs/quee3763/summerproject/non_mag_PBE/LiF(NaCl/LiF.castep’ are the same file
+cp: ‘alpha_1.out’ and ‘/home/dirac/tmcs/quee3763/summerproject/non_mag_PBE/LiF(NaCl/alpha_1.out’ are the same file
+cp: ‘alpha_2.out’ and ‘/home/dirac/tmcs/quee3763/summerproject/non_mag_PBE/LiF(NaCl/alpha_2.out’ are the same file

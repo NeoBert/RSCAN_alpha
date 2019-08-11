@@ -1,0 +1,57 @@
+#!/bin/bash
+#
+#$ -S /bin/bash
+# run in current working directory
+#$ -cwd
+# pass all environmental variables
+#$ -V
+# set parallel env
+#$ -pe smp 4
+# set max wall time
+#$ -l h_rt=50:00:00
+# set soft limit wall time
+#$ -l s_rt=40:00:00
+# set name of job
+# $ -N CASTEP
+# set memory limit
+#$ -l h_vmem=4G
+
+# load modules
+module load intel/2017
+# if using mpi
+# load mpi/openmpi-x86_64
+
+# Set variables
+#CASTEPBIN=/usr/local/CASTEP-20.1
+CASTEPBIN=/home/dirac/tmcs/quee3763/CASTEP20/castep-jry/obj/linux_x86_64_ifort17--serial
+MPICHBIN=/usr/lib64/openmpi/bin/
+
+#SCR=/scratch/$USER/$JOB_ID
+SCR=$TMPDIR
+ORIG=`pwd`
+
+SEED="Ni"
+INCELL="${SEED}.cell"
+INPARAM="${SEED}.param"
+OUTFILE="${SEED}.castep"
+
+export PATH=$CASTEPBIN:$MPICHBIN:$PATH
+export MKL_NUM_THREADS=$NSLOTS
+
+#make directory
+mkdir -p $SCR
+
+#coppy infiles to scratch
+cp $INCELL $INPARAM $SCR
+
+#change to scratch directory
+cd $SCR
+
+#run job (serial)
+$CASTEPBIN/castep.serial $SEED  
+
+#coppy outputs back
+cp $OUTFILE $ORIG
+cp *.out $ORIG
+#delete scratch
+rm -Rf $SCR
